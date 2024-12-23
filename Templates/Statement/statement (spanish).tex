@@ -1,0 +1,179 @@
+\documentclass{article}
+
+
+
+
+%=======================================================================================================================
+%================================================= IMPORTAR PAQUETES ===================================================
+%=======================================================================================================================
+\usepackage{geometry} % Paquete que permite modificar fácilmente las dimensiones de la hoja
+\usepackage[spanish]{babel} % Paquete para cargar el idioma, en este caso el español
+\usepackage{graphicx} % Paquete para añadir imagenes al documento
+\usepackage{enumitem} % Paquete para personalizar las listas (enumerate, itemize y description)
+\usepackage{longtable} % Paquete para usar tablas que aparecen en más de una página
+
+
+
+
+%=======================================================================================================================
+%=============================================== CONFIGURACIÓN GENERAL =================================================
+%=======================================================================================================================
+\geometry{a4paper, vmargin=20mm, hmargin=16mm} % Modifica las dimensiones (el formato de la hoja y los márgenes)
+\setlength{\parindent}{0cm} % La sangría de cada párrafo tiene tamaño 0
+\setlength{\parskip}{-2mm} % La distancia entre párrafos se reduce 2 mm
+\setlist[itemize,1]{label=\textbullet} % Establece el punto como símbolo por defecto para el primer nivel de las listas
+
+
+
+
+%=======================================================================================================================
+%============================================== DECLARACIÓN DE ENTORNOS ================================================
+%=======================================================================================================================
+
+% Entorno para agrupar en una tabla los casos de prueba de ejemplo
+% Fuente del encabezado: Sans Serif (sf)
+% Fuente principal (ejemplos): Typewriter (tt) - los caracteres tienen el mismo ancho
+\newenvironment{SpanishTestCases}
+{ 
+	\vspace{-4mm}
+	\begingroup
+	\tt
+	\renewcommand{\arraystretch}{1.5} % Cambia el espaciado vertical de todas las filas de la tabla
+	\begin{longtable}{| p{85mm} | p{85mm} |}
+		\hline
+		{\sf {\bfseries Entrada}} & {\sf {\bfseries Salida}} \\ \hline
+		\endfirsthead
+}
+{
+	\end{longtable}
+	\endgroup
+}
+
+% Entorno para agrupar restricciones
+% Las restricciones se adicionan con el comando \item
+\newenvironment{ConstraintList}
+{
+	\vspace{-2mm}
+	\begin{itemize}
+}
+{
+	\end{itemize}
+}
+
+
+
+
+%=======================================================================================================================
+%============================================== DECLARACIÓN DE COMANDOS ================================================
+%=======================================================================================================================
+
+% Imprime el encabezado del problema (título del problema, nombre del autor, límite de memoria, límite de tiempo)
+\newcommand{\spanishProblemHeader}[4]{
+	\begin{center} {\huge \sf \bfseries #1} \end{center}
+	\vspace{-2mm}
+	\centerline{\sf \bfseries Autor: #2}
+	\vspace{1mm}
+	\centerline{\sf \bfseries Límite de memoria: #3}
+	\vspace{1mm}
+	\centerline{\sf \bfseries Límite de tiempo: #4}
+	\vspace{10mm}
+}
+
+% Imprime un subtítulo
+\newcommand{\printSubtitle}[1]{
+	\vspace{1mm}
+	\begin{flushleft} {\Large \sf \bfseries #1 \newline} \end{flushleft}
+	\vspace{-4mm}
+}
+
+% Agrega un caso de prueba (entrada, salida) a la tabla de casos definida por el entorno SpanishTestCases
+\newcommand{\addTest}[2]{
+	#1 % Entrada
+	&
+	#2 % Salida
+	\\
+	\hline
+}
+
+
+
+
+
+
+
+
+\begin{document} % Inicio del contenido del documento
+
+
+%=======================================================================================================================
+%============================================== ENCABEZADO DEL PROBLEMA ================================================
+%=======================================================================================================================
+\spanishProblemHeader{Título del problema}{Autor}{Memoria MB}{Tiempo s}
+
+
+
+
+%=======================================================================================================================
+%==================================================== DESCRIPCIÓN ======================================================
+%=======================================================================================================================
+Descripción del problema.
+\newline
+
+
+
+
+%=======================================================================================================================
+%====================================================== ENTRADA ========================================================
+%=======================================================================================================================
+\printSubtitle{Entrada}
+
+Descripción de la entrada.
+\newline
+
+
+
+
+%=======================================================================================================================
+%=================================================== RESTRICCIONES =====================================================
+%=======================================================================================================================
+\printSubtitle{Restricciones}
+
+\begin{ConstraintList}
+	\item $ R1 $
+	\item $ R2 $
+	\item $ R3 $
+\end{ConstraintList}
+
+
+
+
+%=======================================================================================================================
+%======================================================= SALIDA ========================================================
+%=======================================================================================================================
+\printSubtitle{Salida}
+
+Descripción de la salida.
+\newline
+
+
+
+
+%=======================================================================================================================
+%====================================================== EJEMPLOS =======================================================
+%=======================================================================================================================
+\printSubtitle{Ejemplos}
+
+\begin{SpanishTestCases}
+    \addTest{
+		Primera línea de la entrada \newline
+		Segunda línea de la entrada \newline
+		Tercera línea de la entrada
+	}
+	{
+		Primera línea de la salida \newline
+		Segunda línea de la salida
+	}
+\end{SpanishTestCases}
+
+
+\end{document} % Fin del contenido del documento
