@@ -1,0 +1,194 @@
+\documentclass{article}
+
+
+
+
+%=======================================================================================================================
+%================================================== IMPORT PACKAGES ====================================================
+%=======================================================================================================================
+\usepackage{geometry} % Package that allows easily modify the dimensions of the sheet
+\usepackage[english]{babel} % Package to load the language, in this case, english
+\usepackage{graphicx} % Package to add images to the document
+\usepackage{enumitem} % Package to customize lists (enumerate, itemize, and description)
+\usepackage{longtable} % Package to use tables that appear on more than one page
+
+
+
+
+%=======================================================================================================================
+%=============================================== GENERAL CONFIGURATION =================================================
+%=======================================================================================================================
+\geometry{a4paper, vmargin=20mm, hmargin=16mm} % Modify dimensions (sheet format and margins)
+\setlength{\parindent}{0cm} % The indentation of each paragraph is 0
+\setlength{\parskip}{-2mm} % The distance between paragraphs is reduced by 2 mm
+\setlist[itemize,1]{label=\textbullet} % Sets the dot as the default symbol for the first level of lists
+
+
+
+
+%=======================================================================================================================
+%============================================== ENVIRONMENT DECLARATIONS ===============================================
+%=======================================================================================================================
+
+% Environment for grouping the sample test cases in a table
+%   [Header-Font]: Sans Serif (sf)
+%   [Examples-Main-Font]: Typewriter (tt) - The characters have the same width
+\newenvironment{EnglishTestCases}
+{
+	\vspace{-4mm}
+	\begingroup
+	\tt
+	\renewcommand{\arraystretch}{1.5} % Change the vertical spacing of all rows in the table
+	\begin{longtable}{| p{85mm} | p{85mm} |}
+		\hline
+		{\sf {\bfseries Input}} & {\sf {\bfseries Output}} \\ \hline
+		\endfirsthead
+}
+{
+	\end{longtable}
+	\endgroup
+}
+
+% Environment for grouping constraints
+% Constraints are added with the command \item
+\newenvironment{ConstraintList}
+{
+	\vspace{-2mm}
+	\begin{itemize}
+}
+{
+	\end{itemize}
+}
+
+
+
+
+%=======================================================================================================================
+%================================================ COMMAND DECLARATIONS =================================================
+%=======================================================================================================================
+
+% Print problem header (problem title, author, memory limit, time limit)
+%   [syntax]: \englishProblemHeader{problem-title}{author}{memory-limit}{time-limit}
+\newcommand{\englishProblemHeader}[4]{
+	\begin{center} {\huge \sf \bfseries #1} \end{center}
+	\vspace{-2mm}
+	\centerline{\sf \bfseries Author: #2}
+	\vspace{1mm}
+	\centerline{\sf \bfseries Memory Limit: #3}
+	\vspace{1mm}
+	\centerline{\sf \bfseries Time Limit: #4}
+	\vspace{10mm}
+}
+
+% Print a subtitle
+%   [syntax]: \printSubtitle{subtitle}
+\newcommand{\printSubtitle}[1]{
+	\vspace{1mm}
+	\begin{flushleft} {\Large \sf \bfseries #1 \newline} \end{flushleft}
+	\vspace{-4mm}
+}
+
+% Add a test case (input, output) to the table of cases defined by the EnglishTestCases environment
+%   [syntax]: \addTest{input}{output}
+\newcommand{\addTest}[2]{
+	#1 % Input
+	&
+	#2 % Output
+	\\
+	\hline
+}
+
+% Show an image horizontally centered
+%   [syntax]: \image{image-path}{width}{height}{caption}
+\newcommand{\image}[4]{
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=#2, height=#3]{#1}
+		\caption{#4}
+	\end{figure}
+}
+
+
+
+
+
+
+
+
+\begin{document} % Start of document content
+
+
+%=======================================================================================================================
+%=================================================== PROBLEM HEADER ====================================================
+%=======================================================================================================================
+\englishProblemHeader{Problem title}{Author}{Memory MB}{Time s}
+
+
+
+
+%=======================================================================================================================
+%==================================================== DESCRIPTION ======================================================
+%=======================================================================================================================
+Problem description.
+\newline
+
+\image{images/figure-1.png}{9.6cm}{8cm}{Figure description}
+
+
+
+
+%=======================================================================================================================
+%======================================================= INPUT =========================================================
+%=======================================================================================================================
+\printSubtitle{Input}
+
+Input description.
+\newline
+
+
+
+
+%=======================================================================================================================
+%==================================================== CONSTRAINTS ======================================================
+%=======================================================================================================================
+\printSubtitle{Constraints}
+
+\begin{ConstraintList}
+	\item $ C1 $
+	\item $ C2 $
+	\item $ C3 $
+\end{ConstraintList}
+
+
+
+
+%=======================================================================================================================
+%======================================================= OUTPUT ========================================================
+%=======================================================================================================================
+\printSubtitle{Output}
+
+Output description.
+\newline
+
+
+
+
+%=======================================================================================================================
+%====================================================== EXAMPLES =======================================================
+%=======================================================================================================================
+\printSubtitle{Examples}
+
+\begin{EnglishTestCases}
+	\addTest{
+		First line of the input \newline
+		Second line of the input \newline
+		Third line of the input
+	}
+	{
+		First line of the output \newline
+		Second line of the output
+	}
+\end{EnglishTestCases}
+
+
+\end{document} % End of document content
