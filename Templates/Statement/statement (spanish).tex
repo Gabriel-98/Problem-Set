@@ -31,8 +31,8 @@
 %=======================================================================================================================
 
 % Entorno para agrupar en una tabla los casos de prueba de ejemplo
-% Fuente del encabezado: Sans Serif (sf)
-% Fuente principal (ejemplos): Typewriter (tt) - los caracteres tienen el mismo ancho
+%   [fuente-encabezado]: Sans Serif (sf)
+%   [fuente-principal-ejemplos]: Typewriter (tt) - los caracteres tienen el mismo ancho
 \newenvironment{SpanishTestCases}
 { 
 	\vspace{-4mm}
@@ -68,6 +68,7 @@
 %=======================================================================================================================
 
 % Imprime el encabezado del problema (título del problema, nombre del autor, límite de memoria, límite de tiempo)
+%   [sintaxis]: \spanishProblemHeader{titulo-del-problema}{autor}{limite-de-memoria}{limite-de-tiempo}
 \newcommand{\spanishProblemHeader}[4]{
 	\begin{center} {\huge \sf \bfseries #1} \end{center}
 	\vspace{-2mm}
@@ -80,6 +81,7 @@
 }
 
 % Imprime un subtítulo
+%   [sintaxis]: \printSubtitle{subtitulo}
 \newcommand{\printSubtitle}[1]{
 	\vspace{1mm}
 	\begin{flushleft} {\Large \sf \bfseries #1 \newline} \end{flushleft}
@@ -87,12 +89,23 @@
 }
 
 % Agrega un caso de prueba (entrada, salida) a la tabla de casos definida por el entorno SpanishTestCases
+%   [sintaxis]: \addTest{entrada}{salida}
 \newcommand{\addTest}[2]{
 	#1 % Entrada
 	&
 	#2 % Salida
 	\\
 	\hline
+}
+
+% Muestra una imagen centrada horizontalmente
+%   [sintaxis]: \image{ruta-de-la-imagen}{ancho}{alto}{pie-de-imagen}
+\newcommand{\image}[4]{
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=#2, height=#3]{#1}
+		\caption{#4}
+	\end{figure}
 }
 
 
@@ -118,6 +131,8 @@
 %=======================================================================================================================
 Descripción del problema.
 \newline
+
+\image{images/figure-1.png}{9.6cm}{8cm}{Descripción de la figura}
 
 
 
