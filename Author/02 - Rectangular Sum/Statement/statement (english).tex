@@ -1,0 +1,212 @@
+\documentclass{article}
+
+
+
+
+%=======================================================================================================================
+%================================================== IMPORT PACKAGES ====================================================
+%=======================================================================================================================
+\usepackage{geometry} % Package that allows easily modify the dimensions of the sheet
+\usepackage[english]{babel} % Package to load the language, in this case, english
+\usepackage{graphicx} % Package to add images to the document
+\usepackage{enumitem} % Package to customize lists (enumerate, itemize, and description)
+\usepackage{longtable} % Package to use tables that appear on more than one page
+
+
+
+
+%=======================================================================================================================
+%=============================================== GENERAL CONFIGURATION =================================================
+%=======================================================================================================================
+\geometry{a4paper, vmargin=20mm, hmargin=16mm} % Modify dimensions (sheet format and margins)
+\setlength{\parindent}{0cm} % The indentation of each paragraph is 0
+\setlength{\parskip}{-2mm} % The distance between paragraphs is reduced by 2 mm
+\setlist[itemize,1]{label=\textbullet} % Sets the dot as the default symbol for the first level of lists
+
+
+
+
+%=======================================================================================================================
+%============================================== ENVIRONMENT DECLARATIONS ===============================================
+%=======================================================================================================================
+
+% Environment for grouping the sample test cases in a table
+%   [header-font]: Sans Serif (sf)
+%   [examples-main-font]: Typewriter (tt) - The characters have the same width
+\newenvironment{EnglishTestCases}
+{
+	\vspace{-4mm}
+	\begingroup
+	\tt
+	\renewcommand{\arraystretch}{1.5} % Change the vertical spacing of all rows in the table
+	\begin{longtable}{| p{85mm} | p{85mm} |}
+		\hline
+		{\sf {\bfseries Input}} & {\sf {\bfseries Output}} \\ \hline
+		\endfirsthead
+}
+{
+	\end{longtable}
+	\endgroup
+}
+
+% Environment for grouping constraints
+% Constraints are added with the command \item
+\newenvironment{ConstraintList}
+{
+	\vspace{-2mm}
+	\begin{itemize}
+}
+{
+	\end{itemize}
+}
+
+
+
+
+%=======================================================================================================================
+%================================================ COMMAND DECLARATIONS =================================================
+%=======================================================================================================================
+
+% Print problem header (problem title, author, memory limit, time limit)
+%   [syntax]: \englishProblemHeader{problem-title}{author}{memory-limit}{time-limit}
+\newcommand{\englishProblemHeader}[4]{
+	\begin{center} {\huge \sf \bfseries #1} \end{center}
+	\vspace{-2mm}
+	\centerline{\sf \bfseries Author: #2}
+	\vspace{1mm}
+	\centerline{\sf \bfseries Memory Limit: #3}
+	\vspace{1mm}
+	\centerline{\sf \bfseries Time Limit: #4}
+	\vspace{10mm}
+}
+
+% Print a subtitle
+%   [syntax]: \printSubtitle{subtitle}
+\newcommand{\printSubtitle}[1]{
+	\vspace{1mm}
+	\begin{flushleft} {\Large \sf \bfseries #1 \newline} \end{flushleft}
+	\vspace{-4mm}
+}
+
+% Add a test case (input, output) to the table of cases defined by the EnglishTestCases environment
+%   [syntax]: \addTest{input}{output}
+\newcommand{\addTest}[2]{
+	#1 % Input
+	&
+	#2 % Output
+	\\
+	\hline
+}
+
+% Show an image horizontally centered
+%   [syntax]: \image{image-path}{width}{height}{caption}
+\newcommand{\image}[4]{
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=#2, height=#3]{#1}
+		\ifx&#4&\empty
+			% show nothing
+		\else
+			\caption{#4}
+		\fi
+	\end{figure}
+}
+
+
+
+
+
+
+
+
+\begin{document} % Start of document content
+
+
+%=======================================================================================================================
+%=================================================== PROBLEM HEADER ====================================================
+%=======================================================================================================================
+\englishProblemHeader{Rectangular Sum}{Gabriel Gutiérrez Tamayo}{16 MB}{1 s}
+
+
+
+
+%=======================================================================================================================
+%==================================================== DESCRIPTION ======================================================
+%=======================================================================================================================
+In this challenge, you are given a triangular board of $ n $ rows. The first row has one block, and the following rows
+have a block more than the previous row. All the blocks have the same size and are numbered as follows:
+\newline
+
+\image{images/figure-1-block-numbering.png}{4.6cm}{4cm}{}
+
+First, you must find the biggest rectangular area inside the triangular board, and then calculate the value of $ S $
+which corresponds to the sum of the values belonging to the area found. If there are several areas with the same size,
+choose the area that maximizes the value of $ S $. For example, when $ n = 5 $:
+
+\image{images/figure-2-example-n-equal-5.png}{4cm}{4.15cm}{}
+
+The maximum rectangular area is $ (3 * 3) $, which is represented in the previous image.
+\newline
+
+$ S = 4 + 5 + 6 + 8 + 9 + 10 + 13 + 14 + 15 = 84 $
+\newline
+
+Remember that the area of a rectangle is the multiplication of the two sides of the rectangle.
+\newline
+
+
+
+
+%=======================================================================================================================
+%======================================================= INPUT =========================================================
+%=======================================================================================================================
+\printSubtitle{Input}
+
+The first line of input contains an integer $ t ~ (1 \le t \le 10^{5}) $ indicating the number of test cases that
+follow, one for line. Each test case contains a positive integer $ n ~ (1 \le n \le 10^{11}) $ indicating the number of
+rows.
+\newline
+
+
+
+
+%=======================================================================================================================
+%======================================================= OUTPUT ========================================================
+%=======================================================================================================================
+\printSubtitle{Output}
+
+For each test case, you should print a line containing {\tt Case \#x:\ y}, where $ x $ is the test case number (starting
+from $ 1 $) and $ y $ is the sum obtained. Note that this value is very large, so print the result modulo
+$ 10^{9} + 7 $.
+\newline
+
+
+
+
+%=======================================================================================================================
+%====================================================== EXAMPLES =======================================================
+%=======================================================================================================================
+\printSubtitle{Examples}
+
+\begin{EnglishTestCases}
+	\addTest{
+		6 \newline
+		1 \newline
+		2 \newline
+		3 \newline
+		4 \newline
+		5 \newline
+		14
+	}
+	{
+		Case \#1:\ 1 \newline
+		Case \#2:\ 5 \newline
+		Case \#3:\ 16 \newline
+		Case \#4:\ 42 \newline
+		Case \#5:\ 84 \newline
+		Case \#6:\ 3612
+	}
+\end{EnglishTestCases}
+
+
+\end{document} % End of document content
