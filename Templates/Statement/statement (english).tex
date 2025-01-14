@@ -104,7 +104,11 @@
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=#2, height=#3]{#1}
-		\caption{#4}
+		\ifx&#4&\empty
+			% show nothing
+		\else
+			\caption{#4}
+		\fi
 	\end{figure}
 }
 
